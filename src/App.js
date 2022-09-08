@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import DatePicker from "./components/DatePicker";
+import Backdrop from "./components/Backdrop";
+import useDatepicker from "./hooks/useDatepicker";
 
 function App() {
+  const {datepickerIsOpen, close, open} = useDatepicker()
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {datepickerIsOpen && (
+        <>
+          <Backdrop handleClose={close}>
+            <DatePicker handleClose={close} />
+          </Backdrop>
+        </>
+      )}
+      <button className="btn" type="button" onClick={open}>
+        Select date
+      </button>
     </div>
   );
 }
